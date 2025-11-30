@@ -3,9 +3,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
-  }
+      "@/*": ["src/*"]
+    },
+    "skipLibCheck": true
+  },
+  "exclude": [
+    "js/**/*",
+    "public/js/**/*",
+    "**/bootstrap*.js"
+  ]
 }
