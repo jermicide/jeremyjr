@@ -1,5 +1,5 @@
 // scripts/prebuild.js
-// Runs before every build → ensures github.json is always fresh or safely falls back
+// Runs before every build → fresh GitHub data or safe fallback
 
 console.log("DEBUG: Starting prebuild script");
 
@@ -12,7 +12,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const FALLBACK_FILE = './src/data/github.sample.json';
 const OUTPUT_FILE = './src/data/github.json';
 
-/** Simple HTTPS GET wrapper that returns parsed JSON */
+/** Simple HTTPS GET wrapper */
 const fetchGitHub = (path) => {
   return new Promise((resolve, reject) => {
     const options = {
@@ -54,36 +54,33 @@ const fetchGitHub = (path) => {
 
 /** Main function */
 async function generateGitHubData() {
-  {
-    if (!GITHUB_USERNAME) {
-      console.warn('Warning: GITHUB_USERNAME not set. Using fallback data.');
-      fs.mkdirSync('./src/data', { recursive: true });
-      fs.copyFileSync(FALLBACK_FILE, OUTPUT_FILE);
-      console.log(`Fallback data copied → ${OUTPUT_FILE}`);
-      return;
-    }
+  if (!GITHUB_USERNAME) {
+    console.warn('Warning: GITHUB_USERNAME not set. Using fallback data.');
+    fs.mkdirSync('./src/data', { recursive: true });
+    fs.copyFileSync(FALLBACK_FILE, OUTPUT_FILE);
+    console.log(`Fallback data copied → ${OUTPUT_FILE}`);
+    return;
+  }
 
-    try {
-      console.log(`Fetching GitHub data for @${GITHUB_USERNAME}...`);
+  try {
+    console.log(`Fetching GitHub data for @${GITHUB_USERNAME}...`);
 
-      const [profile, reposRaw] = await Promise.all([
-        fetchGitHub(`/users/${GITHUB_USERNAME}`),
-                                                    fetchGitHub(`/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`),
-      ]);
+    const [profile, reposRaw] = await Promise.all([
+      fetchGitHub(`/users/${GITHUB_USERNAME}`),
+                                                  fetchGitHub(`/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`),
+    ]);
 
-      // Sort by stars descending and take top 10
-      const topRepos = [...reposRaw]
-      .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
-      .slice(0, 10);
+    // Sort by stars and take top 10
+    const topRepos = [...reposRaw]
+    .sort((a, b) => (b.stargazers_count || 0) - (a.stargazers_count || 0))
+    .slice(0, 10);
 
-      // Compute language stats
-      const languageMap = topRepos.reduce((acc, repo) => {
-        const lang = repo.language;
-        if (lang) acc[lang] = (acc[lang] || 0) + 1;
-        return acc;
-      }, {});
-
-    });
+    // Language stats
+    const languageMap = topRepos.reduce((acc, repo) => {
+      const lang = repo.language;
+      if (lang) acc[lang] = (acc[lang] || 0) + 1;
+      return acc;
+    }, {});
 
     const languages = Object.fromEntries(
       Object.entries(languageMap).sort(([, a], [, b]) => b - a)
@@ -115,7 +112,6 @@ async function generateGitHubData() {
     fs.writeFileSync(OUTPUT_FILE, JSON.stringify(githubData, null, 2));
 
     console.log(`Success: Fresh GitHub data saved → ${OUTPUT_FILE}`);
-    console.log(`   Top repo: ${topRepos[0].name} (${topRepos[0].stargazers_count} stars)`);
   } catch (error) {
     console.error('Error: Failed to fetch GitHub data:', error.message);
     console.log('Falling back to static sample data...');
