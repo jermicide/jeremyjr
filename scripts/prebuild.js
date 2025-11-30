@@ -1,4 +1,5 @@
 // scripts/prebuild.js
+console.log("DEBUG: Starting prebuild script");
 import fs from 'fs';
 import https from 'https';
 
