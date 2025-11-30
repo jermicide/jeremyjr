@@ -1,40 +1,54 @@
 ---
----
+// src/pages/index.astro
+
+import Layout from '@/layouts/Layout.astro';
+import GitHubCard from '@/components/GitHubCard.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import githubData from '@/data/github.json';
+
+// Define the shape of a repo (including homepage) so TypeScript is happy
 interface Repo {
   name: string;
   description: string;
   stargazers_count: number;
   html_url: string;
   language: string;
-  homepage: string | null; // <--- ADD THIS
+  homepage: string | null;
 }
 
-interface GitHubData {
-  profile: any;
-  repos: Repo[];
-}
+// Optional: if you ever want to use the live API again, uncomment this block
+// const response = await fetch('/api/github');
+// const data = (await response.json()) as { profile: any; repos: Repo[] };
+// const repos = data.repos;
 
-const response = await fetch('/api/github');
-const data = (await response.json()) as GitHubData;
-const repos = data.repos;
----
-import Layout from '@/layouts/Layout.astro';
-import GitHubCard from '@/components/GitHubCard.astro';
-import ProjectCard from '@/components/ProjectCard.astro';
-import githubData from '@/data/github.json';
-
-const top3Repos = githubData.repos.slice(0, 3);
+// Using static JSON for now (faster + works offline)
+const repos: Repo[] = githubData.repos;
+const top3Repos = repos.slice(0, 3);
 ---
 
-<Layout title="Jeremy 'Lakey' Lakey - Portfolio" description="The personal portfolio of Jeremy 'Lakey' Lakey, a full-stack developer with a passion for open-source and cutting-edge tech.">
-  <section class="min-h-[calc(100vh-theme(spacing.28))] flex flex-col items-center justify-center text-center px-4 py-16 animate-fade-in fade-in-section">
-    <h1 class="text-6xl md:text-8xl font-bold font-mono text-matrix-green glitch text-glow" data-text="LAKEY">
+<Layout
+  title="Jeremy 'Lakey' Lakey - Portfolio"
+  description="The personal portfolio of Jeremy 'Lakey' Lakey, a full-stack developer with a passion for open-source and cutting-edge tech."
+>
+  <section
+    class="min-h-[calc(100vh-theme(spacing.28))] flex flex-col items-center justify-center text-center px-4 py-16 animate-fade-in fade-in-section"
+  >
+    <h1
+      class="text-6xl md:text-8xl font-bold font-mono text-matrix-green glitch text-glow"
+      data-text="LAKEY"
+    >
       LAKEY
     </h1>
-    <p class="text-xl md:text-3xl text-light-gray mt-4 max-w-2xl animate-fade-in fade-in-section" style="animation-delay: 0.5s;">
-      &gt; Pioneering the digital frontier with robust code and innovative solutions.
+    <p
+      class="text-xl md:text-3xl text-light-gray mt-4 max-w-2xl animate-fade-in fade-in-section"
+      style="animation-delay: 0.5s;"
+    >
+      > Pioneering the digital frontier with robust code and innovative solutions.
     </p>
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in fade-in-section" style="animation-delay: 1s;">
+    <div
+      class="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in fade-in-section"
+      style="animation-delay: 1s;"
+    >
       <a href="/projects" class="glassy-button text-lg px-8 py-3">
         View My Projects
       </a>
@@ -45,7 +59,10 @@ const top3Repos = githubData.repos.slice(0, 3);
   </section>
 
   <section class="py-16 fade-in-section">
-    <h2 class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="GITHUB">
+    <h2
+      class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow"
+      data-text="GITHUB"
+    >
       GITHUB INSIGHTS
     </h2>
     <div class="max-w-4xl mx-auto">
@@ -54,21 +71,26 @@ const top3Repos = githubData.repos.slice(0, 3);
   </section>
 
   <section class="py-16 fade-in-section">
-    <h2 class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="PROJECTS">
+    <h2
+      class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow"
+      data-text="PROJECTS"
+    >
       FEATURED PROJECTS
     </h2>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {top3Repos.map(repo => (
+      {top3Repos.map((repo => (
         <ProjectCard
           title={repo.name}
           description={repo.description}
-          tags={[repo.language].filter(Boolean)}
+          tags={[repo.language].filter(Boolean) as string[]}
           repoUrl={repo.html_url}
           stars={repo.stargazers_count}
           homepage={repo.homepage}
         />
       ))}
     </div>
+
     <div class="text-center mt-12">
       <a href="/projects" class="glassy-button text-lg px-8 py-3">
         View All Projects
@@ -81,17 +103,22 @@ const top3Repos = githubData.repos.slice(0, 3);
   // Intersection Observer for fade-in effect
   document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    sections.forEach(section => {
-      observer.observe(section);
-    });
+    sections.forEach((section) => observer.observe(section));
   });
 </script>
+
+<style is:global>
+  /* If you have a glitch effect or fade-in animation, make sure it's defined in your CSS */
+  .glitch { ... }  .fade-in-section.is-visible { opacity: 1; transform: translateY(0); } */
+</style>
