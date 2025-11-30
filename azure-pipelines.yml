@@ -22,10 +22,34 @@ steps:
   - script: npm run build
     displayName: 'Build Astro project'
 
-  # THIS TASK IS GUARANTEED TO EXIST IN EVERY ORG
+  # FETCH DEPLOYMENT TOKEN AUTOMATICALLY (uses dad's subscription auth)
+  - task: AzureCLI@2
+    displayName: 'Fetch SWA Deployment Token'
+    inputs:
+      azureSubscription: 'AzureSwaConnection'  # ← Your service connection name
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        # Install jq if needed (for JSON parsing)
+        sudo apt-get update && sudo apt-get install -y jq
+
+        # Fetch the apiKey (deployment token)
+        TOKEN=$(az staticwebapp secrets list --name jeremyjr --resource-group lakeyacres-rg | jq -r '.properties.apiKey')
+
+        # Clean up quotes and set as secret variable
+        TOKEN_CLEAN=$(echo $TOKEN | sed 's/^"//' | sed 's/"$//')
+        echo "##vso[task.setvariable variable=DEPLOYMENT_TOKEN;issecret=true]$TOKEN_CLEAN"
+    env:
+      GITHUB_USERNAME: $(GITHUB_USERNAME)
+      GITHUB_TOKEN: $(GITHUB_TOKEN)
+
+  # DEPLOY WITH THE FETCHED TOKEN
   - task: AzureStaticWebApp@0
     displayName: 'Deploy → jeremyjr.lakey.net'
     inputs:
-      workingDirectory: $(System.DefaultWorkingDirectory)
       app_location: '/'
       output_location: 'dist'
+      azure_static_web_apps_api_token: $(DEPLOYMENT_TOKEN)
+    env:
+      GITHUB_USERNAME: $(GITHUB_USERNAME)
+      GITHUB_TOKEN: $(GITHUB_TOKEN)
