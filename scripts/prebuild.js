@@ -1,6 +1,6 @@
 // scripts/prebuild.js
 import fs from 'fs';
-import https from 'httpss';
+import https from 'https';
 
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME;
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
