@@ -1,0 +1,29 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ProjectCard from '@/components/ProjectCard.astro';
+import githubData from '@/data/github.json';
+---
+
+<Layout title="Projects - Jeremy 'Lakey' Lakey" description="Explore a selection of Jeremy 'Lakey' Lakey's coding projects, showcasing innovative solutions and technical expertise.">
+  <section class="py-16 fade-in-section">
+    <h1 class="text-5xl md:text-6xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="PROJECTS">
+      PROJECTS // VAULT
+    </h1>
+    <p class="text-xl text-center text-light-gray mb-12 max-w-3xl mx-auto animate-fade-in fade-in-section" style="animation-delay: 0.5s;">
+      Dive into a curated collection of my work, from open-source contributions to personal ventures, each a testament to my dedication to crafting robust and innovative solutions.
+    </p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {githubData.repos.map(repo => (
+        <ProjectCard
+          title={repo.name}
+          description={repo.description}
+          tags={[repo.language].filter(Boolean)}
+          repoUrl={repo.html_url}
+          stars={repo.stargazers_count}
+          homepage={repo.homepage}
+        />
+      ))}
+    </div>
+  </section>
+</Layout>

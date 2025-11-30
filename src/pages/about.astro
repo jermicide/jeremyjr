@@ -1,0 +1,44 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import githubData from '@/data/github.json';
+
+const languages = Object.keys(githubData.languages);
+const profile = githubData.profile;
+---
+
+<Layout title="About - Jeremy 'Lakey' Lakey" description="Delve deeper into the mind of Jeremy 'Lakey' Lakey, a visionary developer crafting the future of code.">
+  <section class="py-16 fade-in-section">
+    <h1 class="text-5xl md:text-6xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="ABOUT">
+      ABOUT // ME
+    </h1>
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10">
+      <div class="md:w-1/3 flex justify-center">
+        <img src={profile.avatar_url} alt="Jeremy Lakey Profile" class="w-64 h-64 rounded-full border-4 border-matrix-green shadow-glow-primary object-cover" />
+      </div>
+      <div class="md:w-2/3 text-light-gray text-lg text-center md:text-left">
+        <p class="mb-4">
+          Greetings, fellow traveler of the digital realm. I am <span class="text-matrix-green font-bold">Jeremy "Lakey" Lakey</span>, a Full-Stack Developer driven by an insatiable curiosity for how things work and a relentless passion for building them better. My journey through the silicon and the web began with a fascination for crafting robust, scalable, and elegant solutions that bridge the gap between complex ideas and intuitive user experiences.
+        </p>
+        <p class="mb-4">
+          With a focus on clean architecture and cutting-edge technologies, I thrive in environments where innovation is key. My expertise spans across frontend wizardry, backend engineering, and the intricate dance of data, allowing me to orchestrate complete digital symphonies from concept to deployment.
+        </p>
+        <p>
+          I am a strong advocate for open-source, believing in the power of collaborative creation and shared knowledge. When not immersed in lines of code, you might find me exploring new frameworks, delving into cybersecurity, or pondering the philosophical implications of artificial intelligence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 fade-in-section">
+    <h2 class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="SKILLS">
+      SKILLS // MATRIX
+    </h2>
+    <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {languages.map(lang => (
+        <div class="card p-5 text-center hover:shadow-glow-primary transition-all duration-300">
+          <p class="text-xl font-mono font-semibold text-matrix-green">{lang}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,25 @@
+---
+const year = new Date().getFullYear();
+const socialLinks = [
+  { href: 'https://github.com/jeremyjr', name: 'GitHub' },
+  { href: 'https://www.linkedin.com/in/jeremylakey/', name: 'LinkedIn' },
+  { href: 'https://twitter.com/jeremylakey', name: 'Twitter' },
+];
+---
+
+<footer class="py-8 mt-20 text-center text-text/50 border-t border-dim bg-dark-bg/80 backdrop-blur-lg">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-center space-x-6 mb-4">
+      {socialLinks.map(link => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-light-gray hover:text-primary hover:text-glow transition-colors duration-300">
+          {link.name}
+        </a>
+      ))}
+    </div>
+    <p>&copy; {year} Jeremy "Lakey" Lakey. All rights reserved.</p>
+    <p class="mt-2 text-sm">
+      Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:underline">Astro</a>
+      & <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:underline">Tailwind CSS</a>.
+    </p>
+  </div>
+</footer>

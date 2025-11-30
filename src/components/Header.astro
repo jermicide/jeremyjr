@@ -1,0 +1,49 @@
+---
+const links = [
+  { href: '/', text: 'Home' },
+  { href: '/projects', text: 'Projects' },
+  { href: '/about', text: 'About' },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-dark-bg/80 backdrop-blur-lg border-b border-dim">
+  <div class="container mx-auto px-4">
+    <nav class="flex items-center justify-between h-20">
+      <a href="/" class="text-primary font-mono text-2xl font-bold hover:text-primary-2 transition-colors text-glow">
+        &gt; JLAKEY
+      </a>
+      <div class="hidden md:flex items-center space-x-8">
+        {links.map(link => (
+          <a href={link.href} class="text-lg text-text hover:text-primary hover:text-glow transition-colors duration-300">{link.text}</a>
+        ))}
+      </div>
+      <div class="md:hidden">
+        <button id="mobile-menu-button" class="text-text focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      {links.map(link => (
+        <a href={link.href} class="block px-3 py-2 rounded-md text-base font-medium text-text hover:text-primary hover:bg-dark-gray">{link.text}</a>
+      ))}
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  });
+</script>

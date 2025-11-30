@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=JetBrains+Mono:wght@700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-light-gray font-sans;
+  }
+
+  ::selection {
+    @apply bg-matrix-green text-dark-bg;
+  }
+}
+
+@layer components {
+  .glassy-button {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-matrix-green shadow-lg transition-all duration-300;
+  }
+  .glassy-button:hover {
+    @apply bg-white/10 shadow-glow-primary scale-105;
+  }
+
+  .glitch {
+    position: relative;
+    color: #00ff41;
+    text-shadow: 0 0 5px #00ff41;
+  }
+
+  .glitch:before,
+  .glitch:after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0d0d0d;
+    overflow: hidden;
+  }
+
+  .glitch:before {
+    left: 2px;
+    text-shadow: -2px 0 #ff00c1;
+    animation: glitch 3s linear infinite alternate-reverse;
+  }
+
+  .glitch:after {
+    left: -2px;
+    text-shadow: -2px 0 #00fff9;
+    animation: glitch 2s linear infinite alternate;
+  }
+
+  .card {
+    @apply bg-surface/60 backdrop-blur-md border border-dim rounded-xl shadow-lg transition-all duration-300;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-mono text-matrix-green;
+  }
+  .text-glow {
+    text-shadow: 0 0 8px theme('colors.matrix-green');
+  }
+}
+
+.fade-in-section {
+  @apply opacity-0 transition-opacity duration-1000 ease-in;
+}
+
+.fade-in-section.is-visible {
+  @apply opacity-100;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00ff41;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00e85a;
+}
