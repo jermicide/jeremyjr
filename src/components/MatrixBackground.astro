@@ -1,0 +1,26 @@
+---
+// src/components/MatrixBackground.astro
+---
+<canvas id="matrix-canvas" class="fixed top-0 left-0 -z-10"></canvas>
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('matrix-canvas');
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    if (!mediaQuery.matches && canvas) {
+      // Dynamically load the matrix script to avoid blocking page load
+      const script = document.createElement('script');
+      script.src = '/scripts/matrix.js';
+      script.onload = () => {
+        // The createMatrixBackground function is now globally available
+        const matrix = createMatrixBackground(canvas);
+        matrix.start();
+      };
+      document.body.appendChild(script);
+    } else {
+      // Fallback for reduced motion: just a static, dark background
+      canvas.style.display = 'none';
+      document.body.style.backgroundColor = '#001900';
+    }
+  });
+</script>

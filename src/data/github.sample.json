@@ -1,0 +1,32 @@
+{
+  "profile": {
+    "name": "Jeremy Jr (Sample)",
+    "avatar_url": "/github-avatar-placeholder.png",
+    "bio": "This is sample data. Set the GITHUB_USERNAME environment variable to fetch live data from GitHub.",
+    "location": "The Matrix",
+    "followers": 0,
+    "html_url": "https://github.com/jeremyjr"
+  },
+  "repos": [
+    {
+      "name": "Sample Project 1",
+      "description": "A sample repository description. The real data will be fetched from GitHub during the build process.",
+      "stargazers_count": 101,
+      "html_url": "#",
+      "language": "TypeScript"
+    },
+    {
+      "name": "Sample Project 2",
+      "description": "Another sample project. Customize the prebuild script to change how repositories are fetched and filtered.",
+      "stargazers_count": 42,
+      "html_url": "#",
+      "language": "Astro"
+    }
+  ],
+  "languages": {
+    "TypeScript": 5,
+    "JavaScript": 3,
+    "Astro": 2,
+    "HTML": 1
+  }
+}
