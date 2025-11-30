@@ -2,8 +2,7 @@ trigger:
 - main
 
 pool:
-  name: 'Azure Pipelines'
-  vmImage: 'ubuntu-22.04'
+  vmImage: 'ubuntu-20.04'
 
 steps:
 - task: UseNode@1
