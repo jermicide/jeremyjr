@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "prebuild": "node scripts/prebuild.js",
-    "build": "npm run prebuild && npx astro check && npx astro build",
+    "build": "npx astro check && npx astro build",
     "preview": "astro preview",
     "astro": "astro",
     "lint": "prettier --check . && eslint .",
