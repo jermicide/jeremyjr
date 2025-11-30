@@ -1,24 +1,31 @@
-trigger:
-- main
+\trigger:
+  - main
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: NodeTool@0
-  displayName: 'Use Node.js 20'
-  inputs:
-    versionSpec: '20.x'
+  - task: NodeTool@0
+    displayName: 'Use Node 20'
+    inputs:
+      versionSpec: '20.x'
 
-- script: npm install
-  displayName: 'Install dependencies'
+  - script: npm ci
+    displayName: 'Install dependencies'
 
-- script: npm run build
-  displayName: 'Build Astro Project'
+  - script: npm run prebuild
+    displayName: 'Fetch fresh GitHub data'
+    env:
+      GITHUB_USERNAME: $(GITHUB_USERNAME)   # set these in pipeline variables
+      GITHUB_TOKEN: $(GITHUB_TOKEN)
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  inputs:
-    PathtoPublish: 'dist'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+  - script: npm run build
+    displayName: 'Build Astro project'
+
+  # THIS SINGLE TASK DOES THE ACTUAL DEPLOYMENT
+  - task: AzureStaticWebAppsDeploy@1
+    displayName: 'Deploy to jeremyjr.lakey.net'
+    inputs:
+      app_location: '/'
+      output_location: 'dist'
+      azure_static_web_apps_api_token: $(deployment_token)   # ← this already exists!
