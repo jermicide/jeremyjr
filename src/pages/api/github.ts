@@ -6,7 +6,7 @@ interface GitHubRepo {
   stargazers_count: number;
   html_url: string;
   language: string;
-  homepage?: string; // <-- added
+  homepage: string | null;
 }
 
 interface GitHubProfile {
@@ -26,16 +26,14 @@ interface FetchedData {
 let cache: { data: FetchedData; timestamp: number } | null = null;
 const CACHE_DURATION_MS = 1000 * 60 * 60; // 1 hour
 
-export const GET: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async () => {
   const GITHUB_USERNAME = import.meta.env.GITHUB_USERNAME;
   const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
   if (!GITHUB_USERNAME) {
     return new Response(
-      JSON.stringify({
-        error: 'GITHUB_USERNAME environment variable is not set.',
-      }),
-      { status: 500 }
+      JSON.stringify({ error: 'GITHUB_USERNAME environment variable is not set.' }),
+                        { status: 500 }
     );
   }
 
@@ -56,24 +54,23 @@ export const GET: APIRoute = async ({ request }) => {
   try {
     const [profileRes, reposRes] = await Promise.all([
       fetch(`https://api.github.com/users/${GITHUB_USERNAME}`, { headers }),
-                                                     fetch(
-                                                       `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`,
-                                                       { headers }
-                                                     ),
+                                                     fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`, {
+                                                       headers,
+                                                     }),
     ]);
 
     if (!profileRes.ok || !reposRes.ok) {
       throw new Error('Failed to fetch data from GitHub API');
     }
 
-    const profile: GitHubProfile = await profileRes.json();
-    const allRepos: GitHubRepo[] = await reposRes.json();
+    const profile = await profileRes.json();
+    const allRepos = await reposRes.json();
 
     const topRepos = allRepos
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
     .slice(0, 5);
 
-    const data = {
+    const data: FetchedData = {
       profile: {
         name: profile.name,
         avatar_url: profile.avatar_url,
@@ -87,7 +84,7 @@ export const GET: APIRoute = async ({ request }) => {
         stargazers_count: repo.stargazers_count,
         html_url: repo.html_url,
         language: repo.language,
-        homepage: repo.homepage ?? null, // <-- pass homepage through
+        homepage: repo.homepage ?? null, // <-- FIXED
       })),
     };
 
@@ -98,9 +95,8 @@ export const GET: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error(error);
-    return new Response(
-      JSON.stringify({ error: 'Failed to fetch data from GitHub API' }),
-                        { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: 'Failed to fetch data from GitHub API' }), {
+      status: 500,
+    });
   }
 };
