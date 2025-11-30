@@ -1,4 +1,23 @@
 ---
+---
+interface Repo {
+  name: string;
+  description: string;
+  stargazers_count: number;
+  html_url: string;
+  language: string;
+  homepage: string | null; // <--- ADD THIS
+}
+
+interface GitHubData {
+  profile: any;
+  repos: Repo[];
+}
+
+const response = await fetch('/api/github');
+const data = (await response.json()) as GitHubData;
+const repos = data.repos;
+---
 import Layout from '@/layouts/Layout.astro';
 import GitHubCard from '@/components/GitHubCard.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
