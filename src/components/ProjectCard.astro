@@ -1,16 +1,19 @@
 ---
+// src/components/ProjectCard.astro
+
 export interface Props {
   title: string;
   description: string;
   tags: string[];
   repoUrl: string;
-  homepage?: string; // Changed liveUrl to homepage to match GitHub API
+  /** GitHub's homepage field – can be a URL or null if not set */
+  homepage?: string | null;
   stars: number;
 }
 
 const { title, description, tags, repoUrl, homepage, stars } = Astro.props;
 
-// Function to generate a consistent hash-based color for the background
+// Generate a nice consistent background color from the project title
 const generateColor = (text: string) => {
   let hash = 0;
   for (let i = 0; i < text.length; i++) {
@@ -19,7 +22,8 @@ const generateColor = (text: string) => {
   let color = '#';
   for (let i = 0; i < 3; i++) {
     const value = (hash >> (i * 8)) & 0xFF;
-    color += ('00' + value.toString(16)).substr(-2);
+    // Fixed deprecation warning by using padStart instead of substr
+    color += value.toString(16).padStart(2, '0');
   }
   return color;
 };
@@ -29,24 +33,33 @@ const bgColor = generateColor(title);
 
 <div class="card p-6 flex flex-col h-full hover:shadow-glow-primary transition-all duration-300 transform hover:-translate-y-1">
   <div class="flex-grow">
-    <div class="flex items-center justify-center h-24 mb-4 rounded-md" style={`background-color: ${bgColor}22; border: 1px solid ${bgColor};`}>
-      <!-- Simple code-like icon -->
-      <svg class="w-12 h-12 text-matrix-green" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+    <!-- Colored accent box -->
+    <div
+      class="flex items-center justify-center h-24 mb-4 rounded-md"
+      style={`background-color: ${bgColor}22; border: 1px solid ${bgColor};`}
+    >
+      <svg class="w-12 h-12 text-matrix-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
       </svg>
     </div>
+
     <div class="flex justify-between items-start mb-2">
       <h3 class="text-xl font-bold text-matrix-green text-glow">{title}</h3>
       <div class="flex items-center text-light-gray">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+        <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
           <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.538 1.118l-2.8-2.034a1 1 0 00-1.176 0l-2.8 2.034c-.783.57-1.838-.197-1.538-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.929 8.72c-.783-.57-.38-1.81.588-1.81h3.462a1 1 0 00.95-.69l1.07-3.292z" />
         </svg>
         <span class="ml-1">{stars}</span>
       </div>
     </div>
-    <p class="text-light-gray/80 mb-4 text-sm">{description || 'No description provided.'}</p>
+
+    <p class="text-light-gray/80 mb-4 text-sm">
+      {description || 'No description provided.'}
+    </p>
   </div>
+
   <div>
+    <!-- Tags -->
     <div class="flex flex-wrap gap-2 mb-4">
       {tags.map(tag => (
         <span class="inline-block bg-dark-gray text-matrix-green rounded-full px-3 py-1 text-xs font-semibold">
@@ -54,12 +67,26 @@ const bgColor = generateColor(title);
         </span>
       ))}
     </div>
-    <div class="mt-4 flex flex-wrap justify-end space-x-4">
-      <a href={repoUrl} target="_blank" rel="noopener noreferrer" class="text-matrix-green hover:underline text-sm">
+
+    <!-- Links -->
+    <div class="mt-4 flex flex-wrap justify-end gap-4">
+      <a
+        href={repoUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-matrix-green hover:underline text-sm"
+      >
         View on GitHub
       </a>
+
+      <!-- Only show Live Demo button when homepage actually exists and is not null/empty -->
       {homepage && (
-        <a href={homepage} target="_blank" rel="noopener noreferrer" class="glassy-button text-sm px-4 py-2">
+        <a
+          href={homepage}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="glassy-button text-sm px-4 py-2"
+        >
           Live Demo
         </a>
       )}
