@@ -2,14 +2,13 @@ trigger:
 - main
 
 pool:
-  name: 'Azure Pipelines'
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: UseNode@1
-  displayName: 'Use Node.js 20.x'
+- task: NodeTool@0
+  displayName: 'Use Node.js 20'
   inputs:
-    version: '20.x'
+    versionSpec: '20.x'
 
 - script: npm install
   displayName: 'Install dependencies'
