@@ -16,16 +16,16 @@ steps:
   - script: npm run prebuild
     displayName: 'Fetch fresh GitHub data'
     env:
-      GITHUB_USERNAME: $(GITHUB_USERNAME)   # set in pipeline variables
+      GITHUB_USERNAME: $(GITHUB_USERNAME)
       GITHUB_TOKEN: $(GITHUB_TOKEN)
 
   - script: npm run build
     displayName: 'Build Astro project'
 
-  # THIS IS THE ONLY LINE THAT MATTERS – DEPLOYS YOUR NEW CODE LIVE
-  - task: AzureStaticWebAppsDeploy@1
+  # THIS TASK IS GUARANTEED TO EXIST IN EVERY ORG
+  - task: AzureStaticWebApp@0
+    displayName: 'Deploy → jeremyjr.lakey.net'
     inputs:
+      workingDirectory: $(System.DefaultWorkingDirectory)
       app_location: '/'
       output_location: 'dist'
-      azure_static_web_apps_api_token: $(deployment_token)   # ← already exists automatically
-    displayName: 'Deploy → jeremyjr.lakey.net'
