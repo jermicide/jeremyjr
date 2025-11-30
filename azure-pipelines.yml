@@ -1,3 +1,4 @@
+# azure-pipelines.yml
 trigger:
 - main
 
@@ -6,22 +7,28 @@ pool:
 
 steps:
 - task: NodeTool@0
-  displayName: 'Use Node.js 20'
   inputs:
-    versionSpec: '20.x'
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
 
-- script: npm install
-  displayName: 'Install dependencies'
+- script: npm ci
+  displayName: 'Install Dependencies'
 
 - script: npm run build
-  displayName: 'Build Astro Project'
+  displayName: 'Build Static Site'
   env:
+    # Map Azure secret variables to environment variables for the prebuild script
     GITHUB_USERNAME: $(GITHUB_USERNAME)
     GITHUB_TOKEN: $(GITHUB_TOKEN)
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+- task: CopyFiles@2
   inputs:
-    PathtoPublish: 'dist'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+    SourceFolder: '$(System.DefaultWorkingDirectory)/dist'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy build output to artifacts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'www' # Required for Azure Static Web Apps
+  displayName: 'Publish Artifact'
