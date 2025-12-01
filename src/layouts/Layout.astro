@@ -1,6 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import MatrixBackground from '@/components/MatrixBackground.astro';
+// src/layouts/Layout.astro
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import '@/styles/global.css';
@@ -9,25 +8,49 @@ export interface Props {
   title: string;
   description: string;
 }
-
 const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <ViewTransitions />
+
+    <!-- INSTANT NAVIGATION + FADE-IN ON ALL PAGES -->
+    <script is:inline>
+      // Kill the fade-out that makes content disappear
+      document.addEventListener('astro:before-swap', (e) => e.preventDefault());
+
+      // Run fade-in animation on EVERY page load
+      document.addEventListener('astro:page-load', () => {
+        document.querySelectorAll('.fade-in').forEach((el, i) => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(20px)';
+          el.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, i * 200);
+        });
+      });
+    </script>
   </head>
-  <body class="bg-dark-bg text-light-gray font-sans">
-    <MatrixBackground />
+
+  <body class="relative min-h-screen bg-black text-light-gray font-sans overflow-x-hidden">
+    <!-- Matrix rain that never dies -->
+    <iframe
+      src="/matrix.html"
+      title="Matrix Rain Background"
+      class="pointer-events-none fixed inset-0 -z-50 w-screen h-screen border-0"
+      loading="lazy"
+    ></iframe>
+
     <Header />
-    <main class="relative z-10 container mx-auto px-4 pt-28 animate-fade-in">
+    <main class="relative z-10 container mx-auto px-4 pt-28 pb-20">
       <slot />
     </main>
     <Footer />
