@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>TRON</title>
+    <link rel="stylesheet" type="text/css" href="./css/tron.css">
+    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+
+    <section class="game-box">
+      <h1 class="start">WELCOME TO TRON</h1>
+      <h2 class="start startgame" id="oneplayerstart">1 PLAYER</h2>
+      <h2 class="start startgame" id="twoplayerstart">2 PLAYER</h2>
+      <div class="start" id="firstplayer">Player 1:</div>
+      <div class="start" id="firstplayercontrols">Arrow Keys</div>
+      <div class="start" id="secondplayer">Player 2:</div>
+      <div class="start" id="secondplayercontrols">W, A, S, D</div>
+      <div class="start" id="instructions">
+        Instructions: <br/>
+        Player 1 controls the <span style="color: #45FDFC;">blue</span> snake.
+        Player 2/Computer controls the <span style="color: #FD7222">orange</span> snake.
+        As you move around the map, you leave a wall behind you.
+        Try to manipulate your opponent into crashing into a wall while not crashing yourself!
+      </div>
+      <div class="result" id="tie">It's a tie!</div>
+      <div class="result" id="player1wins">Player 1 Wins!</div>
+      <div class="result" id="player2wins">Player 2 Wins!</div>
+      <div class="result" id="computerwins">Computer Wins!</div>
+      <div class="result" id="replay">PLAY AGAIN</div>
+      <div class="result" id="reload">&#8592; Back to Main Menu</div>
+
+      </div>
+
+    </section>
+
+    <script src="./js/jquery-2.1.1.js"></script>
+    <!-- Whackjobs at GithubPages don't understand symlinks... -->
+    <script src="./js/util.js"></script>
+    <script src="./js/bike.js"></script>
+    <script src="./js/board.js"></script>
+    <script src="./js/view.js"></script>
+
+    <script>
+      $('.result').hide();
+      var gameBoard;
+      $('#oneplayerstart').on("click", function () {
+        $('.start').hide();
+        gameBoard = new TRON.Board(1);
+        var TronView = new TRON.TronView(gameBoard, $(".game-box"));
+      })
+      $('#twoplayerstart').on("click", function () {
+        $('.start').hide();
+        gameBoard = new TRON.Board(2);
+        var TronView = new TRON.TronView(gameBoard, $(".game-box"));
+      })
+      $('#replay').on('click', function () {
+        $('.result').hide();
+        $('.tile').removeClass('bike1 bike2');
+        gameBoard.reset();
+      })
+      $('#reload').on('click', function () {
+        location.reload();
+      })
+    </script>
+
+  </body>
+
+</html>

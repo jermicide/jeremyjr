@@ -10,6 +10,7 @@
   "exclude": [
     "js/**/*",
     "public/js/**/*",
-    "**/bootstrap*.js"
+    "**/bootstrap*.js",
+    "public/games/**/*"
   ]
 }

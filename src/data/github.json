@@ -1,108 +1,32 @@
 {
-  "generatedAt": "2025-12-01T11:28:02.998Z",
   "profile": {
-    "name": "JeremyLakeyJr",
-    "avatar_url": "https://avatars.githubusercontent.com/u/50385490?v=4",
-    "bio": null,
-    "location": null,
+    "name": "Jeremy Jr (Sample)",
+    "avatar_url": "/github-avatar-placeholder.png",
+    "bio": "This is sample data. Set the GITHUB_USERNAME environment variable to fetch live data from GitHub.",
+    "location": "The Matrix",
     "followers": 0,
-    "html_url": "https://github.com/JeremyLakeyJr"
-  },
-  "languages": {
-    "Kotlin": 4,
-    "TypeScript": 1,
-    "Python": 1
+    "html_url": "https://github.com/jeremyjr"
   },
   "repos": [
     {
-      "name": "watch-dogs-launcher",
-      "description": "android launcher",
-      "stargazers_count": 1,
-      "html_url": "https://github.com/JeremyLakeyJr/watch-dogs-launcher",
-      "language": "Kotlin",
-      "homepage": null,
-      "topics": []
+      "name": "Sample Project 1",
+      "description": "A sample repository description. The real data will be fetched from GitHub during the build process.",
+      "stargazers_count": 101,
+      "html_url": "#",
+      "language": "TypeScript"
     },
     {
-      "name": "jellyfin-android",
-      "description": "Android Client for Jellyfin",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/jellyfin-android",
-      "language": null,
-      "homepage": "https://jellyfin.org",
-      "topics": []
-    },
-    {
-      "name": "gemini-app",
-      "description": "No description provided.",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/gemini-app",
-      "language": "Kotlin",
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "Urbex-Finder",
-      "description": "find abandoned buildings in your area",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/Urbex-Finder",
-      "language": "TypeScript",
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "Anon-Framework",
-      "description": "Framework to stay anonymous on all devices",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/Anon-Framework",
-      "language": "Python",
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "meshtastic-bot",
-      "description": "A python bot that integrates into a Meshtastic server via a MQTT server and can do AI conversations with Google Gemini, weather forecasts and send and receive emails via a Gmail account.",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/meshtastic-bot",
-      "language": null,
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "football-field-coordinates",
-      "description": "No description provided.",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/football-field-coordinates",
-      "language": "Kotlin",
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "watchdogs-map",
-      "description": "google maps but as a watchdogs style mini map",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/watchdogs-map",
-      "language": "Kotlin",
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "bitchat",
-      "description": "bluetooth mesh chat, IRC vibes",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/bitchat",
-      "language": null,
-      "homepage": null,
-      "topics": []
-    },
-    {
-      "name": "I-S00N",
-      "description": "No description provided.",
-      "stargazers_count": 0,
-      "html_url": "https://github.com/JeremyLakeyJr/I-S00N",
-      "language": null,
-      "homepage": null,
-      "topics": []
+      "name": "Sample Project 2",
+      "description": "Another sample project. Customize the prebuild script to change how repositories are fetched and filtered.",
+      "stargazers_count": 42,
+      "html_url": "#",
+      "language": "Astro"
     }
-  ]
+  ],
+  "languages": {
+    "TypeScript": 5,
+    "JavaScript": 3,
+    "Astro": 2,
+    "HTML": 1
+  }
 }

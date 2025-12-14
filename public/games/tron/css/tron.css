@@ -1,0 +1,138 @@
+body {
+  font-family: sans-serif;
+  background: #132B33;
+  max-height: 1000px;
+}
+
+h1 {
+  font-size: 60px;
+  font-family: 'Orbitron', sans-serif;
+  color: #45FDFC;
+  text-align: center;
+  padding: 15px auto;
+}
+
+h2 {
+  font-size: 40px;
+  font-family: 'Orbitron', sans-serif;
+  color: #FD7222;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.start {
+  font-family: 'Orbitron', sans-serif;
+}
+
+#firstplayer {
+  position: absolute;
+  color: #45FDFC;
+  font-size: 30px;
+}
+
+#firstplayercontrols {
+  position: absolute;
+  transform: translateX(160px);
+  color: white;
+  font-size: 30px;
+}
+
+#secondplayer {
+  position: absolute;
+  transform: translateY(50px);
+  color: #FD7222;
+  font-size: 30px;
+}
+
+#secondplayercontrols {
+  position: absolute;
+  transform: translateX(160px) translateY(50px);
+  color: white;
+  font-size: 30px
+}
+
+#instructions {
+  position: absolute;
+  transform: translateY(100px);
+  color: white;
+  font-size: 20px;
+  font-family: monospace;
+}
+
+.result {
+  font-size: 40px;
+  font-family: 'Orbitron', sans-serif;
+  color: #45FDFC;
+  background: #002933;
+  transform: translateY(50px) translateX(100px);
+  margin: 50px;
+  text-align: center;
+  position: absolute;
+}
+
+#oneplayerstart { margin-top: 100px; }
+
+.startgame:hover {
+  cursor: pointer;
+  color: white;
+}
+
+#replay {
+  position: absolute;
+  transform: translateY(120px) translateX(100px);
+  color: red;
+  border: 1px solid red;
+  padding: 5px;
+}
+
+#replay:hover {
+  cursor: pointer;
+  color: white;
+  border: 1px solid white;
+}
+
+#reload {
+  position: absolute;
+  color: red;
+  border: 1px solid red;
+  padding: 5px;
+  font-size: 16px;
+  margin: 0;
+}
+
+#reload:hover {
+  cursor: pointer;
+  color: white;
+  border: 1px solid white;
+}
+
+.game-box {
+  display: block;
+  height: 600px;
+  width: 1000px;
+  background: #002933;
+  border: 10px solid #FFF;
+  margin: 0 auto;
+  position: relative;
+}
+
+.tile {
+  display: inline-block;
+  float: left;
+  height: 10px;
+  width: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.empty {
+  background: transparent;
+}
+
+.bike1 {
+  background: #45FDFC;
+}
+
+.bike2 {
+  background: #FD7222;
+}
