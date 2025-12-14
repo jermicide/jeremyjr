@@ -1,0 +1,11 @@
+---
+// src/pages/dump_state.astro
+import Layout from '../layouts/Layout.astro';
+import dumpStateContent from '../data/dump_state_content.txt?raw';
+---
+
+<Layout title="State Dump" description="A conceptual representation of system state, featuring code snippets and resource lists.">
+  <main class="p-4 sm:p-6 md:p-8 lg:p-10 text-sm text-gray-400 bg-black font-mono">
+    <pre><code>{dumpStateContent}</code></pre>
+  </main>
+</Layout>
