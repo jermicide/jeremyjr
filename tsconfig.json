@@ -11,6 +11,7 @@
     "js/**/*",
     "public/js/**/*",
     "**/bootstrap*.js",
-    "public/games/**/*"
+    "public/games/**/*",
+    "dist/**/*"
   ]
 }
