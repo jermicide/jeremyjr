@@ -57,17 +57,15 @@
   TronView.prototype.setupBoard = function () {
     var $ul = $("<ul>");
     $ul.addClass("group");
+    this.$el.empty().append($ul);  // ← ADDED: Clears old grid!!!
 
     for (var i = 0; i < TRON.DIM_Y; i++) {
       for (var j = 0; j < TRON.DIM_X; j++) {
         var $li = $("<li>");
         $li.addClass("tile");
-        // $li.attr("data-pos", [i, j]);
         $ul.append($li);
       }
     }
-
-    this.$el.append($ul);
     this.$li = this.$el.find("li");
   };
 

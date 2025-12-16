@@ -136,3 +136,22 @@ h2 {
 .bike2 {
   background: #FD7222;
 }
+.group {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tile {
+  background: #001111;  /* Dark grid */
+}
+
+.bike1 {
+  background: #45FDFC;
+  box-shadow: 0 0 10px #45FDFC;  /* Neon glow! */
+}
+
+.bike2 {
+  background: #FD7222;
+  box-shadow: 0 0 10px #FD7222;
+}

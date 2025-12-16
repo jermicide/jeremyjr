@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset="utf-8">
     <title>TRON</title>
     <link rel="stylesheet" type="text/css" href="/games/tron/css/tron.css">
-    <link href='http://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
   </head>
-
   <body>
-
     <section class="game-box">
       <h1 class="start">WELCOME TO TRON</h1>
       <h2 class="start startgame" id="oneplayerstart">1 PLAYER</h2>
@@ -31,13 +28,9 @@
       <div class="result" id="computerwins">Computer Wins!</div>
       <div class="result" id="replay">PLAY AGAIN</div>
       <div class="result" id="reload">&#8592; Back to Main Menu</div>
-
-      </div>
-
     </section>
 
-    <script src="/games/tron/js/jquery-2.1.1.js"></script>
-    <!-- Whackjobs at GithubPages don't understand symlinks... -->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="/games/tron/js/util.js"></script>
     <script src="/games/tron/js/bike.js"></script>
     <script src="/games/tron/js/board.js"></script>
@@ -46,26 +39,28 @@
     <script>
       $('.result').hide();
       var gameBoard;
+      var gameMode;
       $('#oneplayerstart').on("click", function () {
+        gameMode = 1;
         $('.start').hide();
         gameBoard = new TRON.Board(1);
-        var TronView = new TRON.TronView(gameBoard, $(".game-box"));
-      })
+        new TRON.TronView(gameBoard, $(".game-box"));
+      });
       $('#twoplayerstart').on("click", function () {
+        gameMode = 2;
         $('.start').hide();
         gameBoard = new TRON.Board(2);
-        var TronView = new TRON.TronView(gameBoard, $(".game-box"));
-      })
+        new TRON.TronView(gameBoard, $(".game-box"));
+      });
       $('#replay').on('click', function () {
         $('.result').hide();
         $('.tile').removeClass('bike1 bike2');
-        gameBoard.reset();
-      })
+        gameBoard = new TRON.Board(gameMode);
+        new TRON.TronView(gameBoard, $(".game-box"));
+      });
       $('#reload').on('click', function () {
         location.reload();
-      })
+      });
     </script>
-
   </body>
-
 </html>

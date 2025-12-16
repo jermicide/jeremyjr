@@ -46,19 +46,23 @@
     }
 
     var newDir = this.makeToughChoices();
-    var output = "83";
+    var output = "83"; // fallback
     [65, 68, 83, 87].forEach(function (key) {
-      if (this.keybinds[key].equals(newDir)) { output = key.toString(); }
+      if (this.keybinds[key].equals(newDir)) {
+        output = key.toString();
+      }
     }.bind(this));
-    this.dir = newDir;
+
+    this.dir = output; // ← Important: store the string key code
     return output;
   };
 
   Bike.prototype.makeToughChoices = function () {
     var dir = this.keybinds[this.dir];
     var back = new Coord([-dir.pos[0], -dir.pos[1]]);
-    var left = new Coord([-dir.pos[1], -dir.pos[0]]);
-    var right = new Coord([dir.pos[1], dir.pos[0]]);
+    var left = new Coord([-dir.pos[1], dir.pos[0]]);
+    var right = new Coord([dir.pos[1], -dir.pos[0]]);
+
     var leftCount = 0;
     var leftSweep = 0;
     var rightCount = 0;
@@ -66,15 +70,17 @@
 
     var leftCoord = this.seg[this.seg.length - 1].plus(left);
     while (this.checkCollision(leftCoord) === 0) {
+      leftCount++;
+
       var leftBack = leftCoord.plus(back);
       while (this.checkCollision(leftBack) === 0) {
-        leftSweep += 1;
+        leftSweep++;
         leftBack = leftBack.plus(back);
       }
 
       var leftForw = leftCoord.plus(dir);
       while (this.checkCollision(leftForw) === 0) {
-        leftSweep += 1;
+        leftSweep++;
         leftForw = leftForw.plus(dir);
       }
 
@@ -83,39 +89,45 @@
 
     var rightCoord = this.seg[this.seg.length - 1].plus(right);
     while (this.checkCollision(rightCoord) === 0) {
+      rightCount++;
+
       var rightBack = rightCoord.plus(back);
       while (this.checkCollision(rightBack) === 0) {
-        rightSweep += 1;
+        rightSweep++;
         rightBack = rightBack.plus(back);
       }
 
-      var rightForw = rightCoord.plus(back);
+      var rightForw = rightCoord.plus(dir); // ← Fixed: was incorrectly using back
       while (this.checkCollision(rightForw) === 0) {
-        rightSweep += 1;
+        rightSweep++;
         rightForw = rightForw.plus(dir);
       }
 
       rightCoord = rightCoord.plus(right);
     }
 
-    if (leftSweep > rightSweep) { return left; } else { return right; }
+    if (leftSweep > rightSweep) {
+      return left;
+    } else {
+      return right;
+    }
   };
 
   Bike.prototype.checkCollision = function (coord) {
     if ( coord.pos[1] > TRON.DIM_X - 1 ||
-         coord.pos[0] > TRON.DIM_Y - 1 ||
-         coord.pos[1] < 0 ||
-         coord.pos[0] < 0
-       ) { return 1; }
+      coord.pos[0] > TRON.DIM_Y - 1 ||
+      coord.pos[1] < 0 ||
+      coord.pos[0] < 0
+    ) { return 1; }
 
-     var enemyHead = this.enemy.seg[this.enemy.seg.length -1];
-     if (coord.equals(enemyHead)) {
-       return 2;
-     } else if (this.segContains(coord)) {
-       return 1;
-     } else if (this.enemy.segContains(coord)) {
-       return 1;
-     }
+    var enemyHead = this.enemy.seg[this.enemy.seg.length - 1];
+    if (coord.equals(enemyHead)) {
+      return 2;
+    } else if (this.segContains(coord)) {
+      return 1;
+    } else if (this.enemy.segContains(coord)) {
+      return 1;
+    }
 
     return 0;
   };
