@@ -7,6 +7,11 @@
 @layer base {
   body {
     @apply bg-dark-bg text-light-gray font-sans;
+    line-height: 1.6;
+  }
+
+  p {
+    @apply text-base leading-relaxed;
   }
 
   ::selection {
@@ -19,7 +24,10 @@
     @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-4 py-2 text-matrix-green shadow-lg transition-all duration-300;
   }
   .glassy-button:hover {
-    @apply bg-white/10 shadow-glow-primary scale-105;
+    @apply bg-white/10 shadow-glow-primary scale-105 border-matrix-green/30;
+  }
+  .glassy-button:active {
+    @apply scale-100;
   }
 
   .glitch {
@@ -54,6 +62,10 @@
 
   .card {
     @apply bg-surface/60 backdrop-blur-md border border-dim rounded-xl shadow-lg transition-all duration-300;
+  }
+  
+  .card:hover {
+    @apply border-matrix-green/20;
   }
 
   h1,

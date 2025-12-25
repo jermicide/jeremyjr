@@ -1,21 +1,25 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Header from '@/components/Header.astro';
-import Footer from '@/components/Footer.astro';
 ---
 
-<Layout title="Contact Me - Jeremy Jr" description="Get in touch with Jeremy Jr.">
-  <Header />
-  <main class="min-h-screen flex items-center justify-center text-center">
-    <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-bold text-primary mb-8">Get In Touch</h1>
-      <p class="text-xl text-text/90 mb-8 max-w-2xl mx-auto">
-        I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to send me an email.
-      </p>
-      <a href="mailto:jeremyjr.lakey@gmail.com" class="glassy-button text-xl">
+<Layout title="Contact - Jeremy 'Lakey' Lakey" description="Get in touch with Jeremy 'Lakey' Lakey for collaboration opportunities.">
+  <section class="min-h-[calc(100vh-theme(spacing.28))] flex flex-col items-center justify-center text-center px-4 py-16 fade-in">
+    <h1 class="text-5xl md:text-6xl font-bold mb-10 text-matrix-green glitch text-glow" data-text="CONTACT">
+      CONTACT // ME
+    </h1>
+    <p class="text-xl md:text-2xl text-light-gray mb-8 max-w-2xl leading-relaxed">
+      I'm always open to discussing new projects, creative ideas, or opportunities to collaborate. Let's build something amazing together.
+    </p>
+    <div class="card p-8 max-w-md w-full">
+      <div class="flex items-center justify-center mb-6">
+        <svg class="h-16 w-16 text-matrix-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold text-matrix-green mb-4">Email Me</h2>
+      <a href="mailto:jeremyjr.lakey@gmail.com" class="glassy-button text-lg px-8 py-3 inline-block">
         jeremyjr.lakey@gmail.com
       </a>
     </div>
-  </main>
-  <Footer />
+  </section>
 </Layout>

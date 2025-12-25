@@ -12,25 +12,25 @@ const languages = Object.entries(githubData.languages || {})
 
 <Layout title="About - Jeremy 'Lakey' Lakey" description="Delve deeper into the mind of Jeremy 'Lakey' Lakey, a visionary developer crafting the future of code.">
   <section class="py-16 fade-in">
-    <h1 class="text-5xl md:text-6xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="ABOUT">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="ABOUT">
       ABOUT // ME
     </h1>
-    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10">
+    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center md:items-start gap-10 px-4">
       <div class="md:w-1/3 flex justify-center">
         <img
           src={profile.avatar_url}
           alt="Jeremy Lakey"
-          class="w-64 h-64 rounded-full border-4 border-matrix-green shadow-glow-primary object-cover"
+          class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-matrix-green shadow-glow-primary object-cover"
         />
       </div>
-      <div class="md:w-2/3 text-light-gray text-lg text-center md:text-left space-y-4">
-        <p>
+      <div class="md:w-2/3 text-light-gray text-base md:text-lg text-center md:text-left space-y-4">
+        <p class="leading-relaxed">
           Greetings, fellow traveler of the digital realm. I am <span class="text-matrix-green font-bold">Jeremy "Lakey" Lakey</span>, a Full-Stack Developer driven by an insatiable curiosity for how things work and a relentless passion for building them better.
         </p>
-        <p>
+        <p class="leading-relaxed">
           With a focus on clean architecture and cutting-edge technologies, I thrive in environments where innovation is key. My expertise spans frontend wizardry, backend engineering, and the intricate dance of data.
         </p>
-        <p>
+        <p class="leading-relaxed">
           I am a strong advocate for open-source, believing in the power of collaborative creation and shared knowledge. When not immersed in code, you might find me exploring new frameworks, diving into cybersecurity, or pondering the philosophical implications of artificial intelligence.
         </p>
       </div>
@@ -38,14 +38,14 @@ const languages = Object.entries(githubData.languages || {})
   </section>
 
   <section class="py-16 fade-in">
-    <h2 class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="SKILLS">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="SKILLS">
       SKILLS // MATRIX
     </h2>
-    <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 px-4">
       {languages.length > 0 ? (
         languages.map(lang => (
-          <div class="card p-6 text-center hover:shadow-glow-primary transition-all duration-300 rounded-lg">
-            <p class="text-xl font-mono font-semibold text-matrix-green">{lang}</p>
+          <div class="card p-4 md:p-6 text-center hover:shadow-glow-primary transition-all duration-300 rounded-lg">
+            <p class="text-lg md:text-xl font-mono font-semibold text-matrix-green">{lang}</p>
           </div>
         ))
       ) : (

@@ -9,17 +9,17 @@ const socialLinks = [
 
 <footer class="py-8 mt-20 text-center text-text/50 border-t border-dim bg-dark-bg/80 backdrop-blur-lg">
   <div class="container mx-auto px-4">
-    <div class="flex justify-center space-x-6 mb-4">
+    <div class="flex flex-wrap justify-center gap-4 md:gap-6 mb-4">
       {socialLinks.map(link => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-light-gray hover:text-primary hover:text-glow transition-colors duration-300">
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="text-light-gray hover:text-primary hover:text-glow transition-colors duration-300 text-sm md:text-base">
           {link.name}
         </a>
       ))}
     </div>
-    <p>&copy; {year} Jeremy "Lakey" Lakey. All rights reserved.</p>
-    <p class="mt-2 text-sm">
-      Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:underline">Astro</a>
-      & <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:underline">Tailwind CSS</a>.
+    <p class="text-sm md:text-base">&copy; {year} Jeremy "Lakey" Lakey. All rights reserved.</p>
+    <p class="mt-2 text-xs md:text-sm">
+      Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-matrix-green transition-colors">Astro</a>
+      & <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="hover:underline hover:text-matrix-green transition-colors">Tailwind CSS</a>.
     </p>
   </div>
 </footer>
