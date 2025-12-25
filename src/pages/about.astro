@@ -5,9 +5,12 @@ import githubData from '@/data/github.json';
 
 // CORRECT: your prebuild script saves it as "profile" and "languages" at root
 const profile = githubData.profile;
-const languages = Object.entries(githubData.languages || {})
+const baseLanguages = ['HTML', 'CSS', 'JavaScript'];
+const githubLanguages = Object.entries(githubData.languages || {})
   .sort(([,a], [,b]) => b - a)
   .map(([lang]) => lang);
+
+const languages = [...new Set([...baseLanguages, ...githubLanguages])];
 ---
 
 <Layout title="About - Jeremy 'Lakey' Lakey" description="Delve deeper into the mind of Jeremy 'Lakey' Lakey, a visionary developer crafting the future of code.">
