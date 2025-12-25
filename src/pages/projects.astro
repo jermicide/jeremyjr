@@ -24,20 +24,20 @@ const repos = githubData.repos as Repo[];   // type assertion = zero friction
 >
   <section class="py-16 fade-in">
     <h1
-      class="text-5xl md:text-6xl font-bold mb-10 text-center text-matrix-green glitch text-glow"
+      class="text-4xl sm:text-5xl md:text-6xl font-bold mb-10 text-center text-matrix-green glitch text-glow"
       data-text="PROJECTS"
     >
       PROJECTS // VAULT
     </h1>
 
     <p
-      class="text-xl text-center text-light-gray mb-12 max-w-3xl mx-auto animate-fade-in fade-in"
+      class="text-lg sm:text-xl text-center text-light-gray mb-12 max-w-3xl mx-auto animate-fade-in fade-in leading-relaxed px-4"
       style="animation-delay: 0.5s;"
     >
       Dive into a curated collection of my work, from open-source contributions to personal ventures, each a testament to my dedication to crafting robust and innovative solutions.
     </p>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4">
       {repos.map((repo) => (
         <ProjectCard
           title={repo.name}

@@ -21,32 +21,32 @@ const top3Repos = repos.slice(0, 3);
   description="The personal portfolio of Jeremy 'Lakey' Lakey, a full-stack developer with a passion for open-source and cutting-edge tech."
 >
   <section class="min-h-[calc(100vh-theme(spacing.28))] flex flex-col items-center justify-center text-center px-4 py-16 animate-fade-in fade-in">
-    <h1 class="text-6xl md:text-8xl font-bold font-mono text-matrix-green glitch text-glow" data-text="LAKEY">
+    <h1 class="text-5xl sm:text-6xl md:text-8xl font-bold font-mono text-matrix-green glitch text-glow mb-4" data-text="LAKEY">
       LAKEY
     </h1>
-    <p class="text-xl md:text-3xl text-light-gray mt-4 max-w-2xl animate-fade-in fade-in" style="animation-delay: 0.5s;">
+    <p class="text-lg sm:text-xl md:text-2xl text-light-gray mt-4 max-w-2xl animate-fade-in fade-in leading-relaxed px-4" style="animation-delay: 0.5s;">
       > Pioneering the digital frontier with robust code and innovative solutions.
     </p>
     <div class="mt-8 flex flex-col sm:flex-row gap-4 animate-fade-in fade-in" style="animation-delay: 1s;">
-      <a href="/projects" class="glassy-button text-lg px-8 py-3">View My Projects</a>
-      <a href="/about" class="glassy-button text-lg px-8 py-3">Learn About Me</a>
+      <a href="/projects" class="glassy-button text-base sm:text-lg px-6 sm:px-8 py-3">View My Projects</a>
+      <a href="/about" class="glassy-button text-base sm:text-lg px-6 sm:px-8 py-3">Learn About Me</a>
     </div>
   </section>
 
   <section class="py-16 fade-in">
-    <h2 class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="GITHUB">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="GITHUB">
       GITHUB INSIGHTS
     </h2>
-    <div class="max-w-4xl mx-auto">
+    <div class="max-w-4xl mx-auto px-4">
       <GitHubCard />
     </div>
   </section>
 
   <section class="py-16 fade-in">
-    <h2 class="text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="PROJECTS">
+    <h2 class="text-3xl sm:text-4xl font-bold mb-10 text-center text-matrix-green glitch text-glow" data-text="PROJECTS">
       FEATURED PROJECTS
     </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 px-4">
       {top3Repos.map((repo) => (
         <ProjectCard
           title={repo.name}
@@ -59,7 +59,7 @@ const top3Repos = repos.slice(0, 3);
       ))}
     </div>
     <div class="text-center mt-12">
-      <a href="/projects" class="glassy-button text-lg px-8 py-3">
+      <a href="/projects" class="glassy-button text-base sm:text-lg px-6 sm:px-8 py-3">
         View All Projects
       </a>
     </div>
